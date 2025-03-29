@@ -13,15 +13,26 @@
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
-            color: #333;
+            color: #2c3e50;
+            background-color: #f5f6fa; /* Light gray-blue background */
         }
         h1, h2, h3 {
-            color: #2c3e50;
+            color: #3498db; /* Bright blue for headings */
         }
         h1 {
             font-size: clamp(24px, 5vw, 28px);
             margin-bottom: 5px;
             text-align: center;
+            opacity: 1;
+            display: inline-block;
+            /* animation: typewriter 2s steps(20) 1s forwards; */
+            white-space: nowrap;
+            overflow: hidden;
+            /* border-right: 3px solid #e74c3c; Red cursor */
+            background-color: #ffffff; /* White background for name */
+            padding: 5px 10px;
+            border-radius: 5px;
+            width: 100%;
         }
         h2 {
             font-size: clamp(20px, 4vw, 22px);
@@ -32,96 +43,133 @@
         h3 {
             font-size: clamp(16px, 3vw, 18px);
             margin-bottom: 5px;
+            color: #e74c3c; /* Red for job/project titles */
         }
         p, li {
             font-size: clamp(14px, 2.5vw, 16px);
+            color: #2c3e50;
         }
         .contact-info {
             margin-bottom: 20px;
             font-size: clamp(12px, 2vw, 14px);
             text-align: center;
             word-wrap: break-word;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            background-color: #6194b6; /* Blue background */
+            color: #ffffff; /* White text */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .contact-info a {
+            color: #e96209; /* Yellow links */
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            color: #056e24; /* White on hover */
         }
         .section {
             margin-bottom: 20px;
+            opacity: 0;
+            transition: all 0.6s ease-out;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .section:nth-child(odd) {
+            background-color: #ffffff; /* White for odd sections */
+        }
+        .section:nth-child(even) {
+            background-color: #ecf0f1; /* Light gray for even sections */
         }
         ul {
             margin-top: 0;
             padding-left: 20px;
         }
+        ul li::before {
+            content: "•";
+            color: #f1c40f; /* Yellow bullets */
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
         .job, .project {
             margin-bottom: 15px;
         }
-        /* Photo Styling */
         .profile-photo {
             display: block;
             margin: 0 auto 15px;
-            width: clamp(100px, 20vw, 150px); /* Scales between 100px and 150px */
+            width: clamp(100px, 20vw, 150px);
             height: clamp(100px, 20vw, 150px);
-            border-radius: 50%; /* Makes it circular */
-            object-fit: cover; /* Ensures the image fits nicely */
-            border: 2px solid #3498db; /* Optional border */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #f1c40f; /* Yellow border */
+            opacity: 1;
+            /* animation: spinFade 1s ease-out forwards; */
+        }
+        /* Animation Keyframes */
+        @keyframes spinFade {
+            from { opacity: 0; transform: rotate(0deg) scale(0.5); }
+            to { opacity: 1; transform: rotate(360deg) scale(1); }
+        }
+        @keyframes typewriter {
+            from { width: 0; opacity: 1; }
+            to { width: 100%; opacity: 1; border-right: none; }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            60% { opacity: 1; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Visible state triggers animations */
+        .visible.contact-info {
+            animation: bounceIn 0.8s ease-out forwards;
+        }
+        .section.visible[data-animation="slide-left"] {
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+        .section.visible[data-animation="slide-right"] {
+            animation: slideInRight 0.6s ease-out forwards;
+        }
+        .section.visible[data-animation="zoom"] {
+            animation: zoomIn 0.6s ease-out forwards;
         }
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 24px;
-            }
-            h2 {
-                font-size: 20px;
-            }
-            h3 {
-                font-size: 16px;
-            }
-            p, li {
-                font-size: 14px;
-            }
-            .contact-info {
-                font-size: 12px;
-            }
-            ul {
-                padding-left: 15px;
-            }
-            .profile-photo {
-                width: 120px;
-                height: 120px;
-            }
+            body { padding: 15px; }
+            h1 { font-size: 24px; }
+            h2 { font-size: 20px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 14px; }
+            .contact-info { font-size: 12px; }
+            ul { padding-left: 15px; }
+            .profile-photo { width: 120px; height: 120px; }
         }
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            h1 {
-                font-size: 20px;
-            }
-            h2 {
-                font-size: 18px;
-            }
-            h3 {
-                font-size: 14px;
-            }
-            p, li {
-                font-size: 12px;
-            }
-            .contact-info {
-                font-size: 10px;
-            }
-            ul {
-                padding-left: 10px;
-            }
-            .section {
-                margin-bottom: Faculdade15px;
-            }
-            .job, .project {
-                margin-bottom: 10px;
-            }
-            .profile-photo {
-                width: 80px;
-                height: 80px;
-            }
+            body { padding: 10px; }
+            h1 { font-size: 20px; }
+            h2 { font-size: 18px; }
+            h3 { font-size: 14px; }
+            p, li { font-size: 12px; }
+            .contact-info { font-size: 10px; }
+            ul { padding-left: 10px; }
+            .section { margin-bottom: 15px; padding: 10px; }
+            .job, .project { margin-bottom: 10px; }
+            .profile-photo { width: 80px; height: 80px; }
         }
     </style>
 </head>
@@ -130,132 +178,153 @@
     <img src="./resume-pic.png" alt="Profile Photo" class="profile-photo">
     <h1>Sachin Kumar</h1>
     <div class="contact-info">
-        <p>Toronto, Canada | <a href="mailto:sachink0702@gmail.com">sachink0702@gmail.com</a>
-        <a target="_blank" href="https://www.linkedin.com/in/sachin~kumar/">LinkedIn</a> | <a href="[Portfolio/GitHub (Optional)]">Portfolio/GitHub</a></p>
+        <p>Toronto, Canada | 
+        <a href="mailto:sachink0702@gmail.com">sachink0702@gmail.com</a> | 
+        <a href="https://www.linkedin.com/in/sachin~kumar/">LinkedIn</a> | <a href="https://github.com/dhimansachin">GitHub</a></p>
     </div>
 
     <!-- Professional Summary -->
-    <div class="section">
+    <div class="section" data-animation="slide-left">
         <h2>Professional Summary</h2>
-        <p>Results-driven AWS Cloud Architect and Developer with over 5.5 years of experience designing, developing, and implementing scalable cloud-based solutions. Proficient in Node.js and Python programming languages, with a proven track record of delivering innovative products such as Contract Management Systems, VeevaVault Access Management, and Document Indexing and Searching solutions. Adept at optimizing cloud infrastructure, enhancing system performance, and collaborating with cross-functional teams to meet business objectives. Currently working in Canada on a closed work permit, seeking opportunities to leverage technical expertise in a dynamic environment.</p>
+        <p>Results-driven AWS Cloud Architect and Developer with over 5.5 years of experience designing, developing, and implementing scalable cloud-based solutions. Proficient in JavaScript and Python programming languages, with a proven track record of delivering innovative products such as Contract Management Systems, VeevaVault Access Management, and Document Indexing and Searching solutions. Adept at optimizing cloud infrastructure, enhancing system performance, and collaborating with cross-functional teams to meet business objectives. Currently working in Canada on a work permit, seeking opportunities to leverage technical expertise in a dynamic environment.</p>
     </div>
 
     <!-- Core Competencies -->
-    <div class="section">
+    <div class="section" data-animation="slide-right">
         <h2>Core Competencies</h2>
         <ul>
-            <li>Cloud Technologies: AWS (EC2, S3, Lambda, RDS, CloudFormation, etc.)</li>
+            <li>Cloud Technologies: AWS (EC2, S3, Lambda, RDS, IAM, CloudFormation, SQS, SNS, Glue etc )</li>
             <li>Programming Languages: Node.js, Python</li>
-            <li>System Design: Cloud Architecture, Microservices, Scalability</li>
-            <li>Product Development: Contract Management, Access Control, Document Indexing</li>
-            <li>Tools & Frameworks: [Add specific tools like Docker, Kubernetes, Git, etc., if applicable]</li>
+            <li>System Design: Cloud Architecture, Microservices, Scalability, Security</li>
+            <li>Product Development: Contract Management, Access Control, Document Indexing, Data processing systems etc</li>
+            <li>Tools & Frameworks: AWS, Docker, ECS, Git, Heroku, AWS SDK, Serverless Framework Reactjs, VueJs etc</li>
             <li>Soft Skills: Problem-solving, Team Collaboration, Agile Methodologies</li>
         </ul>
     </div>
 
     <!-- Professional Experience -->
-    <div class="section">
+    <div class="section" data-animation="zoom">
         <h2>Professional Experience</h2>
         <div class="job">
-            <h3>[Job Title – e.g., AWS Cloud Architect / Developer]</h3>
-            <p>[Company Name] – [City, Province] | [Month Year] – Present</p>
+            <h3>Technical Lead</h3>
+            <p>TCS - New Delhi, India | Jan 2024 - Present</p>
             <ul>
-                <li>Designed and deployed scalable cloud solutions using AWS services, improving system reliability and reducing operational costs by [X% – add a metric if applicable].</li>
-                <li>Developed a Contract Management System that streamlined workflows and enhanced document processing efficiency for [specific stakeholders or clients].</li>
-                <li>Implemented VeevaVault Access Management solution, ensuring secure and compliant access control for [specific industry or use case].</li>
-                <li>Led document indexing and searching functionalities, enabling faster retrieval times and improving user experience by [add measurable impact].</li>
+                <li>Designed and deployed scalable cloud solutions using AWS services, improving system reliability and reducing operational costs by 50% using serverless and event based architecture.</li>
+                <li>Developed a Contract Management System that streamlined workflows and enhanced document processing efficiency for US based pharma company.</li>
+                <li>Implemented VeevaVault Access Management solution, ensuring secure and compliant access control</li>
+                <li>Led project with searching functionalities, enabling faster retrieval times and improving user experience by using auto-correction, keyword suggestions.</li>
                 <li>Collaborated with cross-functional teams to integrate Node.js and Python-based applications into cloud environments.</li>
-                <li>[Add additional key responsibility or achievement]</li>
+                <li>Let cross system integration using ServiceNow, Jira, Azure and AWS and other tools. </li>
             </ul>
         </div>
         <div class="job">
-            <h3>[Previous Job Title – e.g., Cloud Developer / Software Engineer]</h3>
-            <p>[Company Name] – [City, Country] | [Month Year] – [Month Year]</p>
+            <h3>Senior Developer</h3>
+            <p>TCS - New Delhi, India | Jan 2023 - Dec 2023</p>
             <ul>
-                <li>Architected and maintained AWS-based infrastructure to support [specific application or service].</li>
-                <li>Developed backend solutions using Node.js and Python, optimizing performance and scalability for [specific project or product].</li>
-                <li>Automated deployment processes using [specific tools like CloudFormation, CI/CD pipelines], reducing deployment time by [X%].</li>
+                <li>Architected and maintained AWS-based infrastructure for migration of an application from On-Premise to AWS cloud.</li>
+                <li>Developed backend solutions using Node.js and Python, optimizing performance and scalability for a Marketing project.</li>
+                <li>Automated deployment processes using Github Actions, AWS Cloudformation, reducing deployment time by 90%.</li>
                 <li>Conducted code reviews and provided technical guidance to junior developers, fostering a culture of quality and innovation.</li>
-                <li>[Add additional key responsibility or achievement]</li>
             </ul>
         </div>
         <div class="job">
-            <h3>[Previous Job Title – e.g., Junior Developer / Relevant Role]</h3>
-            <p>[Company Name] – [City, Country] | [Month Year] – [Month Year]</p>
+            <h3>Devloper</h3>
+            <p>TCS - New Delhi, India | Jan 2020 - Dec 2022</p>
             <ul>
-                <li>Supported the development of cloud-based applications using AWS and [other relevant technologies].</li>
-                <li>Contributed to [specific project or feature], improving system functionality and user satisfaction.</li>
+                <li>Supported the development of cloud-based applications using VueJs, ReactJs frameworks.</li>
+                <li>Developed Rest APIs and backend systems for integrity of data with other systems. </li>
+                <li>Developed configurable ETL jobs to target HealthCare Professionals for marketing</li>
+                <li>Supported the development of cloud-based applications using VueJs, ReactJs frameworks.</li>
+                <li>Contributed to Orgnisation modules, improving system functionality and user satisfaction by contributing to other projects..</li>
                 <li>Wrote clean, maintainable code in Python and Node.js, adhering to best practices and standards.</li>
-                <li>[Add additional key responsibility or achievement]</li>
+                <li>Explored MS Graph and developed configurable modules for Email using shared mailbox which reduced license cost. </li>
             </ul>
         </div>
     </div>
 
     <!-- Education -->
-    <div class="section">
+    <div class="section" data-animation="slide-left">
         <h2>Education</h2>
-        <h3>[Degree – e.g., Bachelor of Science in Computer Science]</h3>
-        <p>[University Name] – [City, Country] | [Month Year] – [Month Year]</p>
-        <p>[Add notable achievements, GPA, or coursework if relevant, e.g., "Graduated with Honors" or "Specialized in Cloud Computing"]</p>
+        <h3>Master of Computer Science</h3>
+        <p>SASTRA University - Tamilnadu, India | May 2023</p>
+        <h3>Master of Computer Science</h3>
+        <p>Bachelor of Science - Haryana, India | May 2019</p>
     </div>
 
     <!-- Projects -->
-    <div class="section">
+    <div class="section" data-animation="slide-right">
         <h2>Projects</h2>
         <div class="project">
             <h3>Contract Management System</h3>
             <ul>
-                <li>Designed and implemented a cloud-based system on AWS to automate contract lifecycle management, reducing manual effort by [X%].</li>
-                <li>Tech Stack: AWS (S3, Lambda, Glue), Node.js, [add other technologies].</li>
+                <li>Designed and implemented a cloud-based system on AWS to automate contract lifecycle management, reducing manual effort by 90% and reduced conract time from 4 weeks to 3 days.</li>
+                <li>Tech Stack: AWS (S3, Lambda, API Gateway, CloudFront, Route53), Python, VueJs, .</li>
             </ul>
         </div>
         <div class="project">
             <h3>VeevaVault Access Management</h3>
             <ul>
-                <li>Developed a secure access control solution integrated with VeevaVault, ensuring compliance with [specific regulations or standards].</li>
-                <li>Tech Stack: AWS, Python, [add other technologies].</li>
+                <li>Developed a secure access control solution integrated with VeevaVault, ensuring compliance with organisation standards and policies..</li>
+                <li>Tech Stack: AWS (CloudFront, API Gateway, Route53, Cloudfront, SQS, IAM, VPC, lambda, RDS), Azure (MS Graph Services) Nodejs, ReactJs. Git, GitHub Actions</li>
             </ul>
         </div>
         <div class="project">
             <h3>Document Indexing and Searching</h3>
             <ul>
-                <li>Built an efficient indexing and search engine for large datasets, improving retrieval speed by [X%].</li>
-                <li>Tech Stack: AWS (Elasticsearch, S3), Node.js, [add other technologies].</li>
+                <li>Built & support an efficient indexing and search engine for large datasets of medical documents, enabling easy access of medical information to HCP and patients .</li>
+                <li>Tech Stack: AWS (S3), Node.js, Heroku, ElasticSearch, Redis ExpressJs, RabbitMQ.</li>
             </ul>
         </div>
-        <p>[Add more projects or details as needed]</p>
     </div>
 
     <!-- Certifications -->
-    <div class="section">
+    <div class="section" data-animation="zoom">
         <h2>Certifications</h2>
         <ul>
-            <li>[AWS Certified Solutions Architect – Professional / Developer Associate] – [Year]</li>
-            <li>[Other relevant certifications, e.g., Python, Node.js, or Agile-related] – [Year]</li>
-            <li>[Add placeholder for additional certifications if applicable]</li>
+            <li>AWS Certified Developer Associate - 2022</li>
+            <li>Python E2 - 2020</li>
         </ul>
     </div>
 
     <!-- Technical Skills -->
-    <div class="section">
+    <div class="section" data-animation="slide-left">
         <h2>Technical Skills</h2>
         <ul>
-            <li><strong>Cloud Platforms:</strong> AWS (EC2, S3, Lambda, RDS, IAM, etc.)</li>
-            <li><strong>Languages:</strong> Python, Node.js, [add others like JavaScript, SQL, etc., if applicable]</li>
-            <li><strong>Tools:</strong> [Git, Jenkins, Docker, Terraform – add tools you’ve used]</li>
-            <li><strong>Databases:</strong> [MySQL, PostgreSQL, DynamoDB – add databases you’ve worked with]</li>
-            <li>[Add other skills or technologies]</li>
+            <li><strong>Cloud Platforms:</strong> AWS (EC2, S3, Lambda, RDS, IAM, CloudFront, CloudFormation, CodeBuild, Route53, Glue, RDS, VPC, ECS etc)</li>
+            <li><strong>Languages:</strong> Python, JavaScript </li>
+            <li><strong>Tools:</strong> Git, Docker, GitHub Actions, Heroku, ElasticSearch, CodeBuild, Visual Studio Code, Postman, Jira, ServiceNow, Contentful</li>
+            <li><strong>Databases:</strong> MySQL, PostgreSQL, DynamoDB, MongoDB </li>
         </ul>
     </div>
 
     <!-- Additional Information -->
-    <div class="section">
+    <div class="section" data-animation="slide-right">
         <h2>Additional Information</h2>
         <ul>
-            <li><strong>Work Authorization:</strong> Currently in Canada on a closed work permit</li>
-            <li><strong>Languages:</strong> [English – Fluent, add other languages if applicable]</li>
-            <li>[Add hobbies, volunteer work, or other relevant details if desired]</li>
+            <li><strong>Work Authorization:</strong> Currently in Canada on a work permit</li>
+            <li><strong>Languages:</strong> English - Fluent</li>
         </ul>
     </div>
+
+    <!-- JavaScript for Scroll Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const elements = document.querySelectorAll(".section, .contact-info");
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            elements.forEach(element => observer.observe(element));
+        });
+    </script>
 </body>
 </html>
